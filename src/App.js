@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react'
 import {
   Route,
-  BrowserRouter
+  HashRouter
 } from "react-router-dom";
 
 import NavBar from './components/Navbar';
@@ -12,7 +12,7 @@ import PageNote from './components/PageNote';
 export default function App() {
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <HashRouter basename={process.env.PUBLIC_URL}>
       <div className="App">
         <NavBar></NavBar>
         <div className="content">
@@ -20,6 +20,6 @@ export default function App() {
           <Route path="/notes" component={PageNote}/>
         </div>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
