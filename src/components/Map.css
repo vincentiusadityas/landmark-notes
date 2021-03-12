@@ -1,0 +1,7 @@
+.curLocButton {
+    margin-bottom: 10px;
+}
+
+.mapMarker:hover {
+    cursor: pointer;
+}
