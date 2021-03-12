@@ -8,6 +8,7 @@ import {
 import NavBar from './components/Navbar';
 import PageHome from './components/PageHome';
 import PageNote from './components/PageNote';
+import Footer from './components/Footer';
 
 export default function App() {
 
@@ -19,6 +20,7 @@ export default function App() {
           <Route exact path="/" component={PageHome}/>
           <Route path="/notes" component={PageNote}/>
         </div>
+        <Footer></Footer>
       </div>
     </HashRouter>
   );

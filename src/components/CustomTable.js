@@ -6,7 +6,6 @@ import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
@@ -113,7 +112,7 @@ export default function CustomTable({ data }) {
 
     const [searched, setSearched] = React.useState("");
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+    // const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -197,7 +196,7 @@ export default function CustomTable({ data }) {
             />
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
-                    <Table className={classes.table} stickyHeader aria-label="custom pagination table">
+                    <Table className={classes.table} stickyHeader aria-label="custom pagination table" size="medium">
                         <TableHead>
                             <TableRow>
                                 <TableCell>Username</TableCell>
@@ -211,7 +210,7 @@ export default function CustomTable({ data }) {
                                 ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 : rows
                             ).map((row) => (
-                                <TableRow key={row.id}>
+                                <TableRow key={row.id} >
                                     <TableCell component="th" scope="row">
                                         {row.user}
                                     </TableCell>
