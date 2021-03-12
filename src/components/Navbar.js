@@ -7,40 +7,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import './Navbar.css'
 
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   menuButton: {
-//     marginRight: theme.spacing(2),
-//   },
-//   title: {
-//     flexGrow: 1,
-//   },
-// }));
-
-// export default function NavBar() {
-//   const classes = useStyles();
-
-//   return (
-//     <div className={classes.root}>
-//       <AppBar position="static">
-//         <Toolbar>
-//           <Typography variant="h6" className={classes.title}>
-//             Home
-//           </Typography>
-//           <Typography variant="h6" className={classes.title}>
-//             Saved Notes
-//           </Typography>
-//           <Button color="inherit">Login</Button>
-//           <Button color="inherit">Signup</Button>
-//         </Toolbar>
-//       </AppBar>
-//     </div>
-//   );
-// }
-
 const useStyles = makeStyles((theme) => ({
   row:{
     flexGrow:1
@@ -108,13 +74,15 @@ export default function NavBar() {
         <Grid item sm={12} xs={12} className={classes.container}>
           <Toolbar>
             <Grid className={classes.grow}>
-              <Button className={classes.mainLogo}>
-                <ExploreIcon color="primary" size="large"></ExploreIcon>
-              </Button>
+              <NavLink className={classes.navLink} to="/">
+                <Button className={classes.mainLogo}>
+                  <ExploreIcon color="primary" size="large"></ExploreIcon>
+                </Button>
+              </NavLink>
             </Grid>
             <div className={classes.desktopNav}>
               <NavLink className={classes.navLink} to="/"><Button color="inherit" className={classes.buttonFontSize}>Home</Button></NavLink>
-              <NavLink className={classes.navLink} to="/notes"><Button color="inherit" className={classes.buttonFontSize}>Saved Notes</Button></NavLink>
+              <NavLink className={classes.navLink} to="/notes"><Button color="inherit" className={classes.buttonFontSize}>Notes</Button></NavLink>
               <Button color="inherit" disabled>Login</Button>
               <Button color="inherit" disabled>Signup</Button>
             </div>
@@ -144,7 +112,7 @@ export default function NavBar() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose} component={NavLink} to="/">Home</MenuItem>
-                <MenuItem onClick={handleClose} component={NavLink} to="/notes">Saved Notes</MenuItem>
+                <MenuItem onClick={handleClose} component={NavLink} to="/notes">Notes</MenuItem>
                 <MenuItem onClick={handleClose} disabled>Login</MenuItem>
                 <MenuItem onClick={handleClose} disabled>Signup</MenuItem>
               </Menu>

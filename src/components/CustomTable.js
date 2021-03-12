@@ -85,8 +85,17 @@ TablePaginationActions.propTypes = {
 };
 
 const useStyles2 = makeStyles({
+    root: {
+        width: '100%',
+    },
     table: {
         minWidth: 500,
+    },
+    container: {
+        maxHeight: 300,
+    },
+    searchBar: {
+        marginBottom: 10,
     },
 });
 
@@ -156,45 +165,46 @@ export default function CustomTable({ data }) {
 
     return (
         <>
-            <Paper>
-                <SearchBar
-                    value={searched}
-                    onChange={(searchVal) => requestSearch(searchVal)}
-                    onCancelSearch={() => cancelSearch()}
-                    placeholder={`Search by ${filter}`}
-                    // onRequestSearch={handleFilter2}
-                    searchIcon={
-                        <>
-                            <FilterListIcon 
-                                aria-label="filter"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                id="filterIcon"
-                                onClick={handleFilter}
-                                color="primary" 
-                                size="large"/>
-                            <Menu
-                                id="simple-menu"
-                                anchorEl={anchorEl}
-                                keepMounted
-                                open={Boolean(anchorEl)}
-                                onClose={handleSelectFilter}
-                            >
-                                <MenuItem onClick={handleSelectFilter} data-my-value={"username"}>Username</MenuItem>
-                                <MenuItem onClick={handleSelectFilter} data-my-value={"notes"}>Notes</MenuItem>
-                            </Menu>
-                        </>
-                    }
-                />
-                <TableContainer>
-                    <Table className={classes.table} aria-label="custom pagination table">
+            <SearchBar
+                className={classes.searchBar}
+                value={searched}
+                onChange={(searchVal) => requestSearch(searchVal)}
+                onCancelSearch={() => cancelSearch()}
+                placeholder={`Search by ${filter}`}
+                // onRequestSearch={handleFilter2}
+                searchIcon={
+                    <>
+                        <FilterListIcon 
+                            aria-label="filter"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            id="filterIcon"
+                            onClick={handleFilter}
+                            color="primary" 
+                            size="large"/>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleSelectFilter}
+                        >
+                            <MenuItem onClick={handleSelectFilter} data-my-value={"username"}>Username</MenuItem>
+                            <MenuItem onClick={handleSelectFilter} data-my-value={"notes"}>Notes</MenuItem>
+                        </Menu>
+                    </>
+                }
+            />
+            <Paper className={classes.root}>
+                <TableContainer className={classes.container}>
+                    <Table className={classes.table} stickyHeader aria-label="custom pagination table">
                         <TableHead>
-                        <TableRow>
-                            <TableCell>Username</TableCell>
-                            <TableCell>Latitude</TableCell>
-                            <TableCell>Longitude</TableCell>
-                            <TableCell>Notes</TableCell>
-                        </TableRow>
+                            <TableRow>
+                                <TableCell>Username</TableCell>
+                                <TableCell>Latitude</TableCell>
+                                <TableCell>Longitude</TableCell>
+                                <TableCell>Notes</TableCell>
+                            </TableRow>
                         </TableHead>
                         <TableBody>
                             {(rowsPerPage > 0
@@ -202,47 +212,34 @@ export default function CustomTable({ data }) {
                                 : rows
                             ).map((row) => (
                                 <TableRow key={row.id}>
-                                <TableCell component="th" scope="row">
-                                    {row.user}
-                                </TableCell>
-                                <TableCell>
-                                    {row.coords.lat}
-                                </TableCell>
-                                <TableCell>
-                                    {row.coords.lng}
-                                </TableCell>
-                                <TableCell>
-                                    {row.notes}
-                                </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {row.user}
+                                    </TableCell>
+                                    <TableCell>
+                                        {row.coords.lat}
+                                    </TableCell>
+                                    <TableCell>
+                                        {row.coords.lng}
+                                    </TableCell>
+                                    <TableCell>
+                                        {row.notes}
+                                    </TableCell>
                                 </TableRow>
                             ))}
-
-                            {emptyRows > 0 && (
-                                <TableRow style={{ height: 53 * emptyRows }}>
-                                <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
                         </TableBody>
-                        <TableFooter>
-                        <TableRow>
-                            <TablePagination
-                                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                                colSpan={4}
-                                count={data.length}
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                SelectProps={{
-                                    inputProps: { 'aria-label': 'rows per page' },
-                                    native: true,
-                                }}
-                                onChangePage={handleChangePage}
-                                onChangeRowsPerPage={handleChangeRowsPerPage}
-                                ActionsComponent={TablePaginationActions}
-                            />
-                        </TableRow>
-                        </TableFooter>
                     </Table>
                 </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[5, 10, 25, { label: 'All', value: rows.length }]}
+                    component="div"
+                    colSpan={4}
+                    count={rows.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                />
             </Paper>
         </>
     );
